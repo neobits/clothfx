@@ -1,3 +1,10 @@
+//
+//  Plane.cpp
+//  Cloth Simulation Engine
+//
+//  Created by Angelo Moro on 21/10/2009
+//
+
 #include "Plane.h"
 #include <math.h>
 

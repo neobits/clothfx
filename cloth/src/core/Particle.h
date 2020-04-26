@@ -1,3 +1,10 @@
+//
+//  Particle.h
+//  Cloth Simulation Engine
+//
+//  Created by Angelo Moro on 21/10/2009
+//
+
 #pragma once
 
 class CParticle

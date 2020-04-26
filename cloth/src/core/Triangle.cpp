@@ -1,3 +1,10 @@
+//
+//  Triangle.cpp
+//  Cloth Simulation Engine
+//
+//  Created by Angelo Moro on 21/10/2009
+//
+
 #include "Triangle.h"
 #include "math.h"
 

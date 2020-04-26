@@ -1,3 +1,10 @@
+//
+//  main.cpp
+//  Cloth Simulation Engine
+//
+//  Created by Angelo Moro on 21/10/2009
+//
+
 #include <iostream>
 #include <fstream>
 #include <limits>
@@ -12,7 +19,7 @@ using namespace std;
 //----------------------------------------------------------------//
 //----------------------------------------------------------------//
 // Simulator vars
-CSimulator ropa;
+CSimulator simEn;
 float x[25][3]; // 25 particles for cloth
 ofstream File("../data/positions.txt");
 
@@ -51,7 +58,7 @@ void Render(void)
 	glVertex3i(-50, 0, -50);
 	glEnd();
 	// Draw : Particles
-	for (i = 0; i < ropa.getParticleCount(); i++)
+	for (i = 0; i < simEn.getParticleCount(); i++)
 	{
 		if (i == 0 || i == 24)
 		{
@@ -63,26 +70,26 @@ void Render(void)
 		}
 		glLoadIdentity();
 		glTranslatef(x[i][0], x[i][1], x[i][2]);
-		glutSolidSphere(ropa.getParticles()[i].GetRadius(), 10, 10);
+		glutSolidSphere(simEn.getParticles()[i].GetRadius(), 10, 10);
 	}
 	// Draw : Cloth
-	for (i = 0; i < ropa.getCloth().getTriangleCount(); i++)
+	for (i = 0; i < simEn.getCloth().getTriangleCount(); i++)
 	{
 		glLoadIdentity();
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(1.0f, 1.0f, 1.0f);
 		
-		glVertex3f(ropa.getCloth().getTri()[i].getA()->GetPosition()[0],
-				   ropa.getCloth().getTri()[i].getA()->GetPosition()[1],
-				   ropa.getCloth().getTri()[i].getA()->GetPosition()[2]);
+		glVertex3f(simEn.getCloth().getTri()[i].getA()->GetPosition()[0],
+				   simEn.getCloth().getTri()[i].getA()->GetPosition()[1],
+				   simEn.getCloth().getTri()[i].getA()->GetPosition()[2]);
 		
-		glVertex3f(ropa.getCloth().getTri()[i].getB()->GetPosition()[0],
-				   ropa.getCloth().getTri()[i].getB()->GetPosition()[1],
-				   ropa.getCloth().getTri()[i].getB()->GetPosition()[2]);
+		glVertex3f(simEn.getCloth().getTri()[i].getB()->GetPosition()[0],
+				   simEn.getCloth().getTri()[i].getB()->GetPosition()[1],
+				   simEn.getCloth().getTri()[i].getB()->GetPosition()[2]);
 		
-		glVertex3f(ropa.getCloth().getTri()[i].getC()->GetPosition()[0],
-				   ropa.getCloth().getTri()[i].getC()->GetPosition()[1],
-				   ropa.getCloth().getTri()[i].getC()->GetPosition()[2]);
+		glVertex3f(simEn.getCloth().getTri()[i].getC()->GetPosition()[0],
+				   simEn.getCloth().getTri()[i].getC()->GetPosition()[1],
+				   simEn.getCloth().getTri()[i].getC()->GetPosition()[2]);
 		
 		glEnd();
 	}
@@ -214,11 +221,11 @@ void InitCloth()
 		R[i] = r;
 	}
 	// Init cloth simulator
-	ropa.InitializeSimulator(n_parts, 0, 1);
-	ropa.InitializeParticleSystem(X0, V0, M, R);
-	ropa.InitializeClothSystem(UV);
-	ropa.InitializePlaneSystem(Pts1, Pts2, Pts3);
-	ropa.setSimStep(h);
+	simEn.InitializeSimulator(n_parts, 0, 1);
+	simEn.InitializeParticleSystem(X0, V0, M, R);
+	simEn.InitializeClothSystem(UV);
+	simEn.InitializePlaneSystem(Pts1, Pts2, Pts3);
+	simEn.setSimStep(h);
 
 	// Cleaning memory
 	for (i = 0; i < n_parts; i++)
@@ -236,11 +243,11 @@ void SimularTimer(int timerID)
 	if (timerID == 1)
 	{
 		int i, j;
-		ropa.SimStep();
-		float **f = ropa.getPhase();
+		simEn.SimStep();
+		float **f = simEn.getPhase();
 
 		// Spacial phase extraction
-		for (i = 0; i < ropa.getParticleCount(); i++)
+		for (i = 0; i < simEn.getParticleCount(); i++)
 		{
 			for (j = 0; j < 3; j++)
 				x[i][j] = f[i][j];
