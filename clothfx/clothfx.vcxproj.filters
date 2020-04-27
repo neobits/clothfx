@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b37a4d43-863d-4ecf-adfc-7fd4f6da09d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\maths">
+      <UniqueIdentifier>{d645ad8f-2d8b-452e-b591-bbe2d5b1a5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{3df86dc7-6445-4c25-8eae-88d27abcf16c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\Color.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Entity.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\GlutMachine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\IListener.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\maths\Matrix.h">
+      <Filter>Core\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\maths\Quaternion.h">
+      <Filter>Core\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\maths\Vector.h">
+      <Filter>Core\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\maths\MathsUtils.h">
+      <Filter>Core\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Particle.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulator.h" />
+    <ClInclude Include="src\entities\Plane.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Spring.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\ClothInfo.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\ClothTriangle.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Triangle.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\core\GlutMachine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulator.cpp" />
+    <ClCompile Include="src\entities\Plane.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\ClothTriangle.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
