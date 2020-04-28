@@ -18,7 +18,7 @@ public:
 	tkTriangle(){}
 	~tkTriangle(){}
 
-	void CalculateNormal(tkVec3 pA, tkVec3 pB, tkVec3 pC)
+	inline void CalculateNormal(tkVec3 pA, tkVec3 pB, tkVec3 pC)
 	{
 		tkVec3 Vec1, Vec2, pn;
 		Vec1 = pA - pB;
@@ -41,6 +41,8 @@ public:
 		// normalizing
 		normal = pn / pn.Magnitude();
 	}
+
+	inline tkVec3 GetNormal() { return normal; }
 
 protected:
 	tkVec3 normal;

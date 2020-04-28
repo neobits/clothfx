@@ -10,47 +10,43 @@
 #ifndef __PLANE_H__
 #define __PLANE_H__
 
+#include "../core/Triangle.h"
 #include "../core/Entity.h"
 
-class tkPlane : public tkEntity
+class tkPlane : public tkEntity, public tkTriangle
 {
 public:
+	///<summary>Equation : ax + by + cz + d = 0</summary>
 	struct PlaneEquation
 	{
 		float a, b, c, d;
 	};
 
 	tkPlane(void);
-	tkPlane(float *pt1, float *pt2, float *pt3);
+	tkPlane(tkVec3 pt1, tkVec3 pt2, tkVec3 pt3);
 	~tkPlane(void);
 
 	// Evaluate if a point belongs to the plane
 	float Evaluate(float *point);
 	float Evaluate(tkVec3 point);
-	void CalculateNormal();
+	void RecalculateNormal();
 
-	// SET methods
-	inline float *getNormal() { return normal; }
+	// GET methods
 	inline PlaneEquation getEquation() { return eq; }
-	inline float getWidth() { return width; }
-	inline float getLength() { return length; }
-	inline float *getPt1() { return Pt1; }
-	inline float *getPt2() { return Pt2; }
-	inline float *getPt3() { return Pt3; }
+	inline float getWidth() { return m_Width; }
+	inline float getLength() { return m_Length; }
+	inline tkVec3 getPt1() { return m_pt1; }
+	inline tkVec3 getPt2() { return m_pt2; }
+	inline tkVec3 getPt3() { return m_pt3; }
 	// SET methods
-	inline void setWidth(float width) { width = width; }
-	inline void setLenght(float length) { length = length; }
-	inline void setPt1(float *pt);
-	inline void setPt2(float *pt);
-	inline void setPt3(float *pt);
+	inline void setWidth(float width) { m_Width = width; }
+	inline void setLenght(float length) { m_Length = length; }
 
 private:
-	float normal[3];
-	// Equation : ax + by + cz + d = 0
 	PlaneEquation eq;
-	float width;
-	float length;
-	float Pt1[3], Pt2[3], Pt3[3];
+	float m_Width;
+	float m_Length;
+	tkVec3 m_pt1, m_pt2, m_pt3;
 };
 
 #endif // !__PLANE_H__

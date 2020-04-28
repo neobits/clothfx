@@ -10,80 +10,33 @@
 
 //----------------------------------------------------------------//
 tkPlane::tkPlane(void)
-	:width(5.0f), length(10.0f)
+	:m_Width(5.0f), m_Length(10.0f)
 {
 }
 //----------------------------------------------------------------//
-tkPlane::tkPlane(float *pt1, float *pt2, float *pt3)
-	: width(5.0f), length(10.0f)
+tkPlane::tkPlane(tkVec3 pt1, tkVec3 pt2, tkVec3 pt3)
+	: m_Width(5.0f), m_Length(10.0f)
 {
-	setPt1(pt1);
-	setPt2(pt2);
-	setPt3(pt3);
+	m_pt1 = pt1;
+	m_pt2 = pt2;
+	m_pt3 = pt3;
 
-	CalculateNormal();
+	RecalculateNormal();
 }
 //----------------------------------------------------------------//
 tkPlane::~tkPlane(void)
 {
 }
 //----------------------------------------------------------------//
-void tkPlane::CalculateNormal()
+void tkPlane::RecalculateNormal()
 {
-	float V1[3], V2[3], nLen;
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		V1[i] = Pt1[i] - Pt2[i];
-		V2[i] = Pt1[i] - Pt3[i];
-	}
-	/*
-						  | i   j   k |
-		n = V1 x V2 = det |V1x V1y V1z| = i(V1y.V2z - V2y.V1z) - j(V1x.V2z - V2x.V1z) + k(V1x.V2y - V2x.V1y)
-						  |V2x V2y V2z|
-	*/
+	CalculateNormal(m_pt1, m_pt2, m_pt3);
 
-	normal[0] = V1[1] * V2[2] - V2[1] * V1[2];
-	normal[1] = -(V1[0] * V2[2] - V2[0] * V1[2]);
-	normal[2] = V1[0] * V2[1] - V2[0] * V1[1];
-
-	// Normalizing
-	nLen = (float)sqrt(normal[0] * normal[0] + normal[1] * normal[1] + normal[2] * normal[2]);
-	for (i = 0; i < 3; i++)
-		normal[i] = normal[i] / nLen;
-
-	// Found d, satisfying the eq. : n x pt1 = -ds
-	eq.a = normal[0];	//a
-	eq.b = normal[1];	//b
-	eq.c = normal[2];	//c
-	eq.d = -(normal[0] * Pt1[0] + normal[1] * Pt1[1] + normal[2] * Pt1[2]);	//d
-}
-//----------------------------------------------------------------//
-void tkPlane::setPt1(float *pt)
-{
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		Pt1[i] = pt[i];
-	}
-}
-//----------------------------------------------------------------//
-void tkPlane::setPt2(float *pt)
-{
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		Pt2[i] = pt[i];
-	}
-}
-//----------------------------------------------------------------//
-void tkPlane::setPt3(float *pt)
-{
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		Pt3[i] = pt[i];
-	}
+	// Found d, satisfying the eq. : n x pt1 = -d
+	eq.a = normal.x;	//a
+	eq.b = normal.y;	//b
+	eq.c = normal.z;	//c
+	eq.d = -(normal.x * m_pt1.x + normal.y * m_pt1.y + normal.z * m_pt1.z);
 }
 //----------------------------------------------------------------//
 float tkPlane::Evaluate(float *point)

@@ -176,11 +176,11 @@ void tkSimulator::InitializeParticleSystem(vector<tkVec3> x,
 void tkSimulator::InitializePlaneSystem()
 {
 	// Init plane H0 ; ground
-	float c_A[] = { 100.f,  0.f, 100.f },
-		c_B[] = { 100.f,  0.f,-100.f },
-		c_C[] = { -100.f,  0.f,-100.f };
+	tkVec3 pt_a(100.f, 0.f, 100.f);
+	tkVec3 pt_b(100.f, 0.f, -100.f);
+	tkVec3 pt_c(-100.f, 0.f, -100.f);
 
-	tkPlane ground(c_A, c_B, c_C);
+	tkPlane ground(pt_a, pt_b, pt_c);
 	m_Planes.push_back(ground);
 }
 //----------------------------------------------------------------//
@@ -371,9 +371,10 @@ void tkSimulator::ForceCalculus()
 			if (deltaS > 0)
 			{
 				Fi.x = Fi.y = Fi.z = 0.0f;
-				dVel.x += (-(1 + kpRp)*v_i.x * m_Planes[k].getNormal()[0])*m_Planes[k].getNormal()[0];
-				dVel.y += (-(1 + kpRp)*v_i.y * m_Planes[k].getNormal()[1])*m_Planes[k].getNormal()[1];
-				dVel.z += (-(1 + kpRp)*v_i.z * m_Planes[k].getNormal()[2])*m_Planes[k].getNormal()[2];
+				dVel += v_i * (-(1 + kpRp)) * m_Planes[k].GetNormal() * m_Planes[k].GetNormal();
+				//dVel.x += (-(1 + kpRp)*v_i.x * m_Planes[k].getNormal()[0])*m_Planes[k].getNormal()[0];
+				//dVel.y += (-(1 + kpRp)*v_i.y * m_Planes[k].getNormal()[1])*m_Planes[k].getNormal()[1];
+				//dVel.z += (-(1 + kpRp)*v_i.z * m_Planes[k].getNormal()[2])*m_Planes[k].getNormal()[2];
 			}
 		}
 
