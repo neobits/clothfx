@@ -18,6 +18,9 @@ class tkVec2
 {
 public:
 	float x, y;
+
+	tkVec2(void) { this->x = this->y = 0.f; }
+	tkVec2(float x, float y) { this->x = x;  this->y = y; }
 };
 
 /* 3-dimensional vector (x,y,z) */
@@ -132,6 +135,11 @@ public:
 		if (fabs(x) < epsilon) x = 0.0f;
 		if (fabs(y) < epsilon) y = 0.0f;
 		if (fabs(z) < epsilon) z = 0.0f;
+	}
+
+	void Invert(void)
+	{
+		x = -x; y = -y; z = -z;
 	}
 
 	// Static functions

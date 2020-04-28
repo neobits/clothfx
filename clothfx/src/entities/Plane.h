@@ -26,6 +26,7 @@ public:
 
 	// Evaluate if a point belongs to the plane
 	float Evaluate(float *point);
+	float Evaluate(tkVec3 point);
 	void CalculateNormal();
 
 	// SET methods

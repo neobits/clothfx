@@ -18,49 +18,52 @@ public:
 	tkParticle(void)
 	{
 		mass = 1.0f;
-
-		for (int i = 0; i < 3; i++)
-			Position[i] = Velocity[i] = F[i] = 0.0f;
-
-		UV[0] = UV[1] = 0.0f;
 	}
 	virtual ~tkParticle(void) {}
 
 	// SET methods
 	inline void SetMass(float m) { mass = m; }
 	inline void SetRadius(float r) { radius = r; }
+	inline void SetPosition(tkVec3 p) {m_Position = p; }
 	inline void SetPosition(float *p) {
-		for (int i = 0; i < 3; i++) { Position[i] = p[i]; }
+		m_Position.x = p[0]; m_Position.y = p[1]; m_Position.z = p[2];
 	}
-	inline void SetUV(float *uv) {
-		for (int i = 0; i < 2; i++) { UV[i] = uv[i]; }
-	}
+	inline void SetUV(tkVec2 uv) { m_uv = uv; }
+	inline void SetUV(float *uv) { m_uv.x = uv[0]; m_uv.y = uv[1]; }
+
+	inline void SetVelovity(tkVec3 v) { m_Velocity = v; }
 	inline void SetVelovity(float *v) {
-		for (int i = 0; i < 3; i++) { Velocity[i] = v[i]; }
+		m_Velocity.x = v[0]; m_Velocity.y = v[1]; m_Velocity.z = v[2];
 	}
+
+	inline void SetForce(tkVec3 f) { m_F = f; }
 	inline void SetForce(float *f) {
-		for (int i = 0; i < 3; i++) { F[i] = f[i]; }
-	}
-	inline void AddVelocity(float *dv) {
-		for (int i = 0; i < 3; i++) { Velocity[i] += dv[i]; }
+		m_F.x = f[0]; m_F.y = f[1]; m_F.z = f[2];
 	}
 
+	inline void AddVelocity(tkVec3 dv) { m_Velocity += dv; }
+	//inline void AddVelocity(float *dv) {
+	//	for (int i = 0; i < 3; i++) { Velocity[i] += dv[i]; }
+	//}
+
+	void AddForce(tkVec3 df) { m_F += df; }
+	
 	void AddForce(float *df) {
-		for (int i = 0; i < 3; i++) { F[i] += df[i]; }
+		m_F.x += df[0]; m_F.y += df[1]; m_F.z += df[2];
 	}
 
-	inline float* GetPosition() { return Position; }
-	inline float* GetUV() { return UV; }
-	inline float* GetVelocity() { return Velocity; }
-	inline float* GetForce() { return F; }
+	inline tkVec3 GetPosition() { return m_Position; }
+	inline tkVec2 GetUV() { return m_uv; }
+	inline tkVec3 GetVelocity() { return m_Velocity; }
+	inline tkVec3 GetForce() { return m_F; }
 	inline float GetMass() { return mass; }
 	inline float GetRadius() { return radius; }
 
 private:
-	float Position[3];	// Global coordinates
-	float UV[2];		// UV coordinates
-	float Velocity[3];	// Vl
-	float F[3];			// Forces applied
+	tkVec3 m_Position;	// Global coordinates
+	tkVec3 m_Velocity;	// Current velocity
+	tkVec2 m_uv;		// UV coordinates
+	tkVec3 m_F;			// Forces applied
 	float mass;			//
 	float radius;		//
 };

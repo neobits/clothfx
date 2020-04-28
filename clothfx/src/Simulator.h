@@ -25,6 +25,8 @@
 #define CLOTH_PARTICLE_COUNT 25
 #define GRAVITY tkVec3(0,-9.8f,0)
 
+using namespace std;
+
 namespace Core
 {
 	class tkSimulator : public IListener
@@ -45,10 +47,15 @@ namespace Core
 
 		// Init with {n} particles, {s} springs and {p} planes
 		void InitializeSimulator(int n, int s, int p);
-		void InitializeParticleSystem(float **x, float **v, float *m, float *r);
+		
+		void InitializeParticleSystem(vector<tkVec3> x, 
+									  vector<tkVec3> v, 
+									  vector<float> m,
+									  vector<float> r);
+
 		void InitializeSpringSystem(int i_o, int i_p);
 		void InitializePlaneSystem();
-		void InitializeClothSystem(float** uv);
+		void InitializeClothSystem(vector<tkVec2> uv);
 		void ForceCalculus();
 		bool CollisionDetection();
 		void UpdatePhase();

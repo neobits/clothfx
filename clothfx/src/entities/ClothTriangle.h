@@ -6,15 +6,16 @@
 //
 
 #pragma once
+#include "../core/Triangle.h"
 #include "Particle.h"
 #include "Spring.h"
 
-class ClothTriangle
+class ClothTriangle : public tkTriangle
 {
 public:
 	ClothTriangle(void);
 	~ClothTriangle(void);
-	void CalculateNormal();
+	void RecalculateNormal();
 
 	inline void setA(tkParticle *p_a){ p_A = p_a; }
 	inline void setB(tkParticle *p_b){ p_B = p_b; }
@@ -27,12 +28,11 @@ public:
 	inline tkParticle *getC() { return p_C; }
 	inline float GetAreaUV() { return areaUV; }
 
-	inline tkSpring *getSprings() { return S; }
+	inline tkSpring *GetSprings() { return m_Springs; }
 
 private:
 	tkParticle *p_A, *p_B, *p_C;
-	tkSpring S[3];
-	float normal[3];
+	tkSpring m_Springs[3];
 
 	float areaUV = 0.03125f;
 };

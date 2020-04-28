@@ -92,3 +92,9 @@ float tkPlane::Evaluate(float *point)
 	return eq.a * point[0] + eq.b * point[1] + eq.c * point[2] + eq.d;
 }
 //----------------------------------------------------------------//
+float tkPlane::Evaluate(tkVec3 point)
+{
+	// solve H(P) = a*Px + b*Py + c*Pz + d
+	return eq.a * point.x + eq.b * point.y + eq.c * point.z + eq.d;
+}
+//----------------------------------------------------------------//

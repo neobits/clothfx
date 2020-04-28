@@ -12,7 +12,8 @@ class ClothInfo
 {
 public:
 	ClothInfo(void)
-		:m_kStretch(4.0f), m_kShear(0.1f), m_kBend(1.0f), m_nTriangles(32), m_kDrag(0.0f)
+		:m_kStretch(4.0f), m_kShear(0.1f), m_kBend(1.0f), 
+		m_nTriangles(32), m_kDrag(0.0f)
 	{
 	}
 	~ClothInfo(void) {}
@@ -26,7 +27,7 @@ public:
 
 private:
 	ClothTriangle T[32];	// Triangle array
-	int m_nTriangles;	// Number of  cloth triangles
+	int m_nTriangles;	// Number of cloth triangles
 	float m_kStretch;	// Stretch energy constant
 	float m_kShear;		// Shear energy constant
 	float m_kBend;		// Bend energy constant
